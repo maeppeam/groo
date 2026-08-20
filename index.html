@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GROO - Grow Together, Work Better</title>
+
+  <link rel="icon" href="favicon.png" type="image/png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    #app {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Loading screen */
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #ffffff;
+      transition: opacity 0.4s ease;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .logo {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #111827;
+      margin-bottom: 18px;
+    }
+
+    .loader {
+      width: 34px;
+      height: 34px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #111827;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading-text {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Loading -->
+  <div id="loading">
+    <div class="logo">GROO</div>
+    <div class="loader"></div>
+    <div class="loading-text">Memuat aplikasi...</div>
+  </div>
+
+  <!-- Google Apps Script -->
+  <iframe
+    id="app"
+    src="https://script.google.com/macros/s/AKfycbw1Ixg5WLELLE_sMhY6siI3D0mQKGRoJCwpzE1BaaYF_im05WxenWbJx1FVSzD/exec"
+    allow="fullscreen"
+    loading="eager">
+  </iframe>
+
+  <script>
+    const iframe = document.getElementById("app");
+    const loading = document.getElementById("loading");
+
+    iframe.addEventListener("load", function () {
+      setTimeout(() => {
+        loading.classList.add("hidden");
+
+        setTimeout(() => {
+          loading.remove();
+        }, 500);
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>
